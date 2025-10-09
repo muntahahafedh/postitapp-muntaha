@@ -11,6 +11,7 @@ import {
 import logo from "../Images/logo-t.png";
 import { Link } from "react-router-dom";
 import "../App.css";
+import loginimage from "../Images/loginImage.jpg";
 
 const Login = () => {
   return (
@@ -19,54 +20,48 @@ const Login = () => {
         <Form>
           <Row>
             <Col md={3}>
-              <img
-                src={logo} // Replace with your actual logo path
-                alt="Logo"
-                style={{ maxWidth: "150px", height: "auto" }}
-              />
+              <FormGroup>
+                <Label for="exampleEmail">Email</Label>
+                <Input
+                  id="exampleEmail"
+                  name="email"
+                  placeholder="with a placeholder"
+                  type="email"
+                />
+              </FormGroup>
             </Col>
           </Row>
 
           <Row>
-            <p>email </p>
-            <FormGroup floating>
-              <Input
-                id="exampleEmail"
-                name="email"
-                placeholder="with a placeholder"
-                type="email"
-              />
-              <Label for="exampleEmail">Email</Label>
-            </FormGroup>
-          </Row>
-
-          <Row>
             <Col md={3}>
-              <Col md={3}></Col>
               <p>password </p>
-              <FormGroup floating>
+              <FormGroup>
+                <Label for="examplePassword">Password</Label>
                 <Input
                   id="examplePassword"
                   name="password"
                   placeholder="password placeholder"
                   type="password"
                 />
-                <Label for="examplePassword">Password</Label>
               </FormGroup>
             </Col>
           </Row>
 
           <Row>
-            <Col md={3}></Col>{" "}
-            <Button color="primary" block>
-              Login{" "}
-            </Button>
+            <Col md={3}>
+              <Button>Login</Button>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={3}>
+              <p className="smalltext">
+                No Account ? <Link to="/Register"> Sing Up now. </Link>
+              </p>
+            </Col>
           </Row>
         </Form>
       </Container>
-      <p className="smalltext">
-        No Account ? <Link to="/Register"> Sing Up now. </Link>
-      </p>
     </div>
   );
 };
