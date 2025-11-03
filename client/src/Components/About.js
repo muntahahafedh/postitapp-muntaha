@@ -1,7 +1,7 @@
 const About = () => {
   return (
     <div>
-      <h2> Muntaha 2020393022 </h2>
+      <h2>Jasmine</h2>
     </div>
   );
 };

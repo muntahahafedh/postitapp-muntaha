@@ -223,9 +223,10 @@ body {
   font-size: small;
 }
 .loginsmall {
-  width: 200px;
-  height: 300px;
+  width: 150px;
+  height: 200px;
 }
+
 .header {
   display: flex;
 
@@ -255,5 +256,11 @@ body {
 }
 
 .nav a:hover {
-  color: #f8d408; /* Change color on hover (optional) */
+  color: #007bff; /* Change color on hover (optional) */
+}
+
+.nav-link a {
+  color: inherit;
+
+  text-decoration: none;
 }

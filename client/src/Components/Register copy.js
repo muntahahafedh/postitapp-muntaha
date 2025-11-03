@@ -5,8 +5,6 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerUser } from "../Features/UserSlice";
-import { useNavigate } from "react-router-dom";
 import {
   Button,
   Col,
@@ -45,7 +43,6 @@ const Register = () => {
 
   // Handle form submission
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     try {
@@ -56,9 +53,7 @@ const Register = () => {
         email: data.email,
         password: data.password,
       };
-      dispatch(registerUser(userData));
-      alert("Saved");
-      navigate("/login");
+      dispatch(addUser(userData));
     } catch (error) {
       console.log(error);
     }
@@ -140,6 +135,43 @@ const Register = () => {
           </Col>
         </Row>
       </Form>
+      <Row>
+        <Col md={6}>
+          <h2>List of Users</h2>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userList.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.email}</td>
+                  <td>{user.name}</td>
+                  <td>{user.password}</td>
+                  <td>
+                    <Link
+                      to={`/update/${user.email}/${user.name}/${user.password}`}
+                    >
+                      <Button color="primary">Update User</Button>
+                    </Link>{" "}
+                    <Button
+                      color="danger"
+                      onClick={() => handleDelete(user.email)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Col>
+      </Row>
     </Container>
   );
 };
