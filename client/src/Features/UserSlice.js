@@ -30,6 +30,28 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const login = createAsyncThunk("users/login", async (userData) => {
+  try {
+    const response = await axios.post("http://localhost:3001/login", {
+      email: userData.email,
+      password: userData.password,
+    });
+    const user = response.data.user;
+    return user;
+  } catch (error) {
+    const errorMessage = "Invalid credentials";
+    alert(errorMessage);
+    throw new Error(errorMessage);
+  }
+});
+
+export const logout = createAsyncThunk("/users/logout", async () => {
+  try {
+    // Send a request to your server to log the user out
+    const response = await axios.post("http://localhost:3001/logout");
+  } catch (error) {}
+});
+
 export const userSlice = createSlice({
   name: "users", //name of the state
   initialState, // initial value of the state
@@ -60,6 +82,30 @@ export const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(logout.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        // Clear user data or perform additional cleanup if needed
+        state.user = {};
+        state.isLoading = false;
+        state.isSuccess = false;
+      })
+      .addCase(logout.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
       });
   },
 });

@@ -71,6 +71,12 @@ app.post("/login", async (req, res) => {
   }
 });
 
+//POST API-logout
+
+app.post("/logout", async (req, res) => {
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
 app.listen(3001, () => {
   console.log("You are connected");
 });
